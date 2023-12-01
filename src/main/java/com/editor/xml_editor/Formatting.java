@@ -5,9 +5,21 @@ public class Formatting {
         StringBuilder indentedXML=new StringBuilder();
         int level=0;
         int n=xml.length();
+        boolean inbody=false;
+        // loop on the given XML string and add indentation  based on whether its closing or opening tag
         for (int i=0;i<n;i++){
             char c=xml.charAt(i);
             if(c=='<') {
+                // check if the coming tag is body to handle indentation of its text
+                if (xml.regionMatches(i, "<body>", 0, 6)) {
+                    indentedXML.append(generateSpaces(level));
+                    level++;
+                    indentedXML.append("<body>");
+                    indentedXML.append('\n');
+                    i+=7;
+                    inbody=true;
+                    continue;
+                }
                 char next=xml.charAt(i+1);
                 if(next=='/'){
                     level--;
@@ -18,8 +30,14 @@ public class Formatting {
                     level++;
                 }
             }
+            // add indentation to the body of the text
+            if(inbody){
+                indentedXML.append(generateSpaces(level));
+                inbody=false;
+            }
             indentedXML.append(c);
-        }
+            }
+        // remove the empty lines
         int index = 0;
         while (index < indentedXML.length()) {
             char currentChar = indentedXML.charAt(index);
@@ -31,8 +49,10 @@ public class Formatting {
                 index++;
             }
         }
+
         return indentedXML.toString();
     }
+    //generate indentation based on the level
     private static String generateSpaces(int level) {
         StringBuilder spaces= new StringBuilder();
         for(int i=0; i<level; i++){
@@ -114,6 +134,7 @@ public static void main(String[] args){
             "</users>";
         System.out.println("XML before indentation: \n"+xml);
         String result =indentation(xml);
+        System.out.println("\n\n");
         System.out.println("XML After indendation: \n"+result);
 }
 }
