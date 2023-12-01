@@ -60,6 +60,13 @@ public class Formatting {
         }
         return spaces.toString();
     }
+    // Minifying xml
+    public static String minify(String xml){
+        String result="";
+        result=xml.replaceAll(">\n",">");
+        result=xml.replaceAll("\n","");
+        return result;
+    }
 public static void main(String[] args){
     String xml="<users>\n" +
             "<user>\n" +
@@ -134,7 +141,10 @@ public static void main(String[] args){
             "</users>";
         System.out.println("XML before indentation: \n"+xml);
         String result =indentation(xml);
+        String result2=minify(xml);
         System.out.println("\n\n");
         System.out.println("XML After indendation: \n"+result);
+        System.out.println("\n\n");
+        System.out.println("XML After Manify: \n"+result2);
 }
 }
