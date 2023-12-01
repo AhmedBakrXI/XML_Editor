@@ -7,7 +7,18 @@ public class User {
     private int id;
     private String username;
     private List<User> followers;
+
+    public String getUserXML() {
+        return userXML;
+    }
+
+    public void setUserXML(String userXML) {
+        this.userXML = userXML;
+    }
+
     private List<String> posts;
+
+    private String userXML;
 
     public User() {
         followers = new ArrayList<>();
