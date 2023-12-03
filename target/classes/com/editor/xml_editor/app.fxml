@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.editor.xml_editor.AppController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #9c55bd;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="123.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/Xml.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="301.0" layoutY="91.0" text="Editor" textFill="#e97600">
+         <font>
+            <Font name="Calibri" size="59.0" />
+         </font>
+      </Label>
+      <Label layoutX="245.0" layoutY="210.0" text="Choose a file" textFill="#e97600">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="BrowseButton" layoutX="275.0" layoutY="253.0" mnemonicParsing="false" text="Browse" />
+      <Label layoutX="291.0" layoutY="290.0" text="Or" textFill="#e97600">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="CopyPasteButton" layoutX="253.0" layoutY="328.0" mnemonicParsing="false" text="Copy and Paste" />
+   </children>
+</AnchorPane>
