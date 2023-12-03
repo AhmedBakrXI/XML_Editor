@@ -21,10 +21,11 @@ public class User {
 
     public static void main(String[] args) throws IOException {
         String xml = FileHandler.readFile("example.xml");
+//        xml.replaceAll();
         Parser parser = new Parser();
         parser.parseXML(xml);
         List<String> xmlList = parser.getXmlParsed();
-        List<String> list = parser.correctXML();
+        parser.correctXML();
         List<String> list1 = parser.getUserList();
         List<User> users = new ArrayList<>();
         for (int i = 0; i < list1.size(); i++) {
@@ -37,7 +38,7 @@ public class User {
             users.get(i).setFollowers(users);
         }
 
-        System.out.println(users.get(1));
+        System.out.println(users.get(0).getUsername());
     }
 
     public String getUserXML() {
@@ -93,7 +94,7 @@ public class User {
                 ", username='" + username + '\'' + "\n" +
                 ", followers=" + followers + "\n" +
                 ", followersID=" + followersID + "\n" +
-                ", posts=" + posts +
+                ", posts=" + posts + "\n" +
                 '}';
     }
 

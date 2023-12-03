@@ -10,6 +10,7 @@ public class Post {
     Post() {
         topics = new ArrayList<>();
     }
+
     public String getBody() {
         return body;
     }
@@ -29,8 +30,8 @@ public class Post {
     @Override
     public String toString() {
         return "Post{" +
-                "body='" + body + '\'' +
-                ", topics=" + topics +
+                "body='" + body + '\'' + "\n" +
+                ", topics=" + topics + "\n" +
                 '}';
     }
 }
