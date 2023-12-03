@@ -1,3 +1,9 @@
+/*
+ * @author : Ahmed Khaled Abdelmaksod Ebrahim
+ * @date   : 3 DEC 2023
+ * @brief  : contains the class hufmann which contains the algorithm of the compression and decompression of the XML file
+*/
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
