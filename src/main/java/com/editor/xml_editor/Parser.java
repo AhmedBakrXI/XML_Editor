@@ -58,7 +58,6 @@ public class Parser {
                 userList.add(user.toString());
             }
         }
-        System.out.println(userList);
         return userList;
     }
 
