@@ -1,4 +1,4 @@
-/*
+package com.editor.xml_editor;/*
  * @author : Ahmed Khaled Abdelmaksod Ebrahim
  * @date   : 3 DEC 2023
  * @brief  : contains the class hufmann which contains the algorithm of the compression and decompression of the XML file
