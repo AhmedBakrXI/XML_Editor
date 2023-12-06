@@ -2,22 +2,17 @@ package com.editor.xml_editor;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
-import java.util.ResourceBundle;
 
 public class AppController  {
 
@@ -36,8 +31,7 @@ public class AppController  {
     @FXML
     private Button CopyPasteButton;
 
-    @FXML
-    private TextArea inputText;
+
     @FXML
     private void handleBrowseButtonAction(MouseEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -79,32 +73,63 @@ public class AppController  {
     }
 
 */
+/*
 
     private void openFullScreenStage(String fileContent) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("editor.fxml"));
-            loader.setClassLoader(getClass().getClassLoader());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("editor.fxml"));
             Parent root = loader.load();
 
-            // Accessing the controller directly
-            AppController controller = loader.getController();
+            // Accessing the controller of the editor.fxml
+            editorController editorController1 = loader.getController();
 
             // Assuming that TextArea in editor.fxml has the fx:id "inputText"
-            TextArea textArea = controller.inputText;
+            TextArea textArea = editorController1.InputText;
 
             if (textArea != null) {
                 textArea.setText(fileContent);
-
+                editorController1.setInputText(textArea);
+                //System.out.println(fileContent);
                 Stage fullScreenStage = new Stage();
                 fullScreenStage.setFullScreen(true);
                 fullScreenStage.setScene(new Scene(root));
                 fullScreenStage.show();
             } else {
-                System.err.println("TextArea is null");
+                System.err.println("TextArea in editor.fxml is null");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }*/
+
+    private void openFullScreenStage(String fileContent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("editor.fxml"));
+            Parent root = loader.load();
+
+            // Accessing the controller of the editor.fxml
+            editorController editorController1 = loader.getController();
+
+            // Assuming TextArea in editor.fxml has the fx:id "inputText"
+            /*TextArea textArea = editorController1.inputText;*/
+
+            //editorController1.initialize();
+           // editorController1.fakeinitialize();
+
+            editorController1.setInputText(fileContent);
+
+
+
+                Stage fullScreenStage = new Stage();
+                fullScreenStage.setFullScreen(true);
+                fullScreenStage.setScene(new Scene(root));
+                fullScreenStage.show();
+
+                //System.err.println("TextArea in editor.fxml is null");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }
