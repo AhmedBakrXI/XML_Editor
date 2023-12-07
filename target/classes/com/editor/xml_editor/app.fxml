@@ -40,7 +40,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Button fx:id="BrowseButton" onMouseClicked="#handleBrowseButtonAction" mnemonicParsing="false" text="Browse">
+                  <Button fx:id="BrowseButton" mnemonicParsing="false" onMouseClicked="#handleBrowseButtonAction" text="Browse">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
@@ -49,7 +49,7 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Button fx:id="CopyPasteButton" mnemonicParsing="false" text="Copy and Paste">
+                  <Button fx:id="CopyPasteButton" mnemonicParsing="false" onAction="#onCopyAndPasteButton" text="Copy and Paste">
                      <font>
                         <Font size="18.0" />
                      </font></Button>

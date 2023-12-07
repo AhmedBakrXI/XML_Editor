@@ -1,5 +1,6 @@
 package com.editor.xml_editor;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -132,4 +133,18 @@ public class AppController  {
         }
     }
 
+
+    @FXML
+    void onCopyAndPasteButton(ActionEvent event) {
+
+        openFullScreenStage("");
+
+    }
+
+
+
+
+
 }
+
+
