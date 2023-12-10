@@ -13,6 +13,7 @@ public class FileHandler {
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(content.getBytes(StandardCharsets.UTF_8));
         fos.close();
+        System.out.println("Content-Length: " + content.length());
     }
 
     public static String readFile(String path) throws IOException {
