@@ -37,7 +37,7 @@
                      <children>
                         <ImageView fitHeight="66.0" fitWidth="299.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../assets/Glitched%20Logo.png" />
+                              <Image url="@../../../assets/Glitched Logo.png" />
                            </image>
                         </ImageView>
                         <Label prefHeight="23.0" prefWidth="188.0" text="XML Efficient XML Editing" textFill="WHITE">
