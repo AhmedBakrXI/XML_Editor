@@ -1,8 +1,12 @@
 package com.editor.xml_editor;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import javax.sound.sampled.*;
 
 public class Parser {
     private List<String> userList;
@@ -145,7 +149,7 @@ public class Parser {
         correctedXML = new ArrayList<>();
         List<Integer> errorTagsIndex = new ArrayList<>();
         correctedXML.addAll(xmlParsed);
-
+        int counter = 0;
         while (!checkConsistency(correctedXML)) {
             String tag = replaceError.substring(replaceError.indexOf("</") + 2, replaceError.indexOf(">"));
             for (int i = 0; i < correctedXML.size(); i++) {
@@ -204,6 +208,17 @@ public class Parser {
                     }
                 }
             }
+            counter++;
+            if (counter == 10) {
+                System.out.println("Can't correct");
+                try {
+                    runAlarm();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+//                correctedXML = xmlParsed;
+                break;
+            }
         }
         errorCount = correctedXML.size() - xmlParsed.size();
         System.out.println("Error Count = " + errorCount);
@@ -218,6 +233,14 @@ public class Parser {
                 xmlString.append(list.get(i)).append("\n");
         }
         return xmlString.toString();
+    }
+
+    private void runAlarm() throws UnsupportedAudioFileException, IOException, LineUnavailableException, URISyntaxException {
+        File audioFile = new File(getClass().getResource("/audio/alarm.wav").toURI());
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
     }
 
 //    public static void main(String[] args) {

@@ -1,8 +1,11 @@
+package com.editor.xml_editor;
+
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import static java.util.Objects.requireNonNull;
+
 
 public class Hufmann {
     private Node root;

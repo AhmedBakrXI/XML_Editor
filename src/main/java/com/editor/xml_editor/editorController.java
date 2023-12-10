@@ -1,5 +1,6 @@
 package com.editor.xml_editor;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -23,6 +24,8 @@ public class editorController implements Initializable {
     protected TextArea inputText;
     @FXML
     protected TextFlow outputText;
+
+    static File inputFile;
     Parser parser;
     List<Integer> errorList;
     List<String> xmlList;
@@ -160,7 +163,9 @@ public class editorController implements Initializable {
         String xml = Parser.listToString(list);
 
         Hufmann hufmann = new Hufmann(xml);
-        String decodedString = hufmann.get_xml_decode();
+        String encoded = hufmann.get_xml_encode();
+        Decompress decompresser = new Decompress(hufmann.getRoot());
+        String decodedString = decompresser.decode(encoded);
 
         Text decodedText = new Text(decodedString);
         decodedText.setFill(Color.rgb(152, 0, 152));
@@ -207,6 +212,16 @@ public class editorController implements Initializable {
             result.add(indent);
         }
         return result;
+    }
+
+    public void saveHandler() throws IOException {
+        fileContent = inputText.getText();
+        parser = new Parser();
+        parser.parseXML(fileContent);
+        errorList = parser.correctXML();
+        outputText.getChildren().clear();
+        outputText.getChildren().add(new Text(fileContent));
+        FileHandler.writeFile(inputFile.getPath(), fileContent);
     }
 }
 

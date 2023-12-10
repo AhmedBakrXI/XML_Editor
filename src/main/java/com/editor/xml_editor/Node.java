@@ -1,3 +1,5 @@
+package com.editor.xml_editor;
+
 public class Node implements Comparable<Node>{
     private final int freq;
     private Node leftNode;

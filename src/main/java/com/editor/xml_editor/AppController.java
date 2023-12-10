@@ -39,7 +39,7 @@ public class AppController  {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose a File");
         File selectedFile = fileChooser.showOpenDialog(BrowseButton.getScene().getWindow());
-
+        editorController.inputFile = selectedFile;
         if (selectedFile != null) {
             try {
                 String fileContent = Files.readString(selectedFile.toPath());

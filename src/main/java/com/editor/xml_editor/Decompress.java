@@ -1,3 +1,5 @@
+package com.editor.xml_editor;
+
 public class Decompress {
     private Node root;
     public Decompress(Node root) {
