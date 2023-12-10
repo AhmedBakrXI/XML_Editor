@@ -1,4 +1,4 @@
-package com.editor.xml_editor;
+package com.editor.data;
 
 import java.util.ArrayList;
 import java.util.List;

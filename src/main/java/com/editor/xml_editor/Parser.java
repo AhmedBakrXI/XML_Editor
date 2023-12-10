@@ -8,11 +8,16 @@ public class Parser {
     private List<String> userList;
     private List<String> xmlParsed;
     private List<Integer> xmlErrors;
+
+    public List<String> getCorrectedXML() {
+        return correctedXML;
+    }
+
     private List<String> correctedXML;
     private String replaceError;
     private int errorCount;
 
-    Parser() {
+    public Parser() {
         userList = new ArrayList<>();
         xmlErrors = new ArrayList<>();
         xmlParsed = new ArrayList<>();
@@ -207,4 +212,11 @@ public class Parser {
         return errorTagsIndex;
     }
 
+//    public static void main(String[] args) {
+//        String s = FileHandler.readFile("test.xml");
+//        Parser parser = new Parser();
+//        parser.parseXML(s);
+//        parser.correctXML();
+//        List<String> xml = parser.getCorrectedXML();
+//    }
 }

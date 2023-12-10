@@ -1,4 +1,7 @@
-package com.editor.xml_editor;
+package com.editor.data;
+
+import com.editor.xml_editor.FileHandler;
+import com.editor.xml_editor.Parser;
 
 import java.io.IOException;
 import java.util.ArrayList;

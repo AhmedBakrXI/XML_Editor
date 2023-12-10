@@ -1,9 +1,12 @@
 package com.editor.xml_editor;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -12,7 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class AppController {
+public class AppController  {
+
     @FXML
     private Label welcomeText;
 
@@ -27,6 +31,7 @@ public class AppController {
 
     @FXML
     private Button CopyPasteButton;
+
 
     @FXML
     private void handleBrowseButtonAction(MouseEvent event) {
@@ -43,17 +48,103 @@ public class AppController {
             }
         }
     }
+/*
+    private void openFullScreenStage(String fileContent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("editor.fxml"));
+            Parent root = loader.load();
+
+            // Accessing the controller directly
+            AppController controller = loader.getController();
+
+            // Assuming that TextArea in editor.fxml has the fx:id "inputText"
+            controller.inputText.setText(fileContent);
+
+
+                Stage fullScreenStage = new Stage();
+                fullScreenStage.setFullScreen(true);
+                fullScreenStage.setScene(new Scene(root));
+                fullScreenStage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+*/
+/*
 
     private void openFullScreenStage(String fileContent) {
-        Stage fullScreenStage = new Stage();
-        fullScreenStage.setFullScreen(true);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("editor.fxml"));
+            Parent root = loader.load();
 
-        TextField textField = new TextField(fileContent);
-        textField.setEditable(false);
+            // Accessing the controller of the editor.fxml
+            editorController editorController1 = loader.getController();
 
-        fullScreenStage.setScene(new javafx.scene.Scene(new javafx.scene.layout.StackPane(textField)));
-        fullScreenStage.show();
+            // Assuming that TextArea in editor.fxml has the fx:id "inputText"
+            TextArea textArea = editorController1.InputText;
+
+            if (textArea != null) {
+                textArea.setText(fileContent);
+                editorController1.setInputText(textArea);
+                //System.out.println(fileContent);
+                Stage fullScreenStage = new Stage();
+                fullScreenStage.setFullScreen(true);
+                fullScreenStage.setScene(new Scene(root));
+                fullScreenStage.show();
+            } else {
+                System.err.println("TextArea in editor.fxml is null");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    private void openFullScreenStage(String fileContent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("editor.fxml"));
+            Parent root = loader.load();
+
+            // Accessing the controller of the editor.fxml
+            editorController editorController1 = loader.getController();
+
+            // Assuming TextArea in editor.fxml has the fx:id "inputText"
+            /*TextArea textArea = editorController1.inputText;*/
+
+            //editorController1.initialize();
+           // editorController1.fakeinitialize();
+
+            editorController1.setInputText(fileContent);
+
+
+
+                Stage fullScreenStage = new Stage();
+                fullScreenStage.setFullScreen(true);
+                fullScreenStage.setScene(new Scene(root));
+                fullScreenStage.show();
+
+                //System.err.println("TextArea in editor.fxml is null");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
+    @FXML
+    void onCopyAndPasteButton(ActionEvent event) {
+
+        openFullScreenStage("");
+
+    }
+
+
+
+
+
 }
+
+
