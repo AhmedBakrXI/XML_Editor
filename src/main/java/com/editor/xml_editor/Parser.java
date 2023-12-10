@@ -212,6 +212,14 @@ public class Parser {
         return errorTagsIndex;
     }
 
+    public static String listToString(List<String> list) {
+        StringBuilder xmlString = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+                xmlString.append(list.get(i)).append("\n");
+        }
+        return xmlString.toString();
+    }
+
 //    public static void main(String[] args) {
 //        String s = FileHandler.readFile("test.xml");
 //        Parser parser = new Parser();
