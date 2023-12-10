@@ -10,8 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.editor.xml_editor.editorController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.editor.xml_editor.editorController">
    <children>
       <MenuBar maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.6" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -40,7 +41,7 @@
          <bottom>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" text="Consistency" HBox.hgrow="ALWAYS">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#consistencyCheckHandler" text="Consistency" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </HBox.margin>
@@ -48,32 +49,32 @@
                         <Insets bottom="20.0" />
                      </opaqueInsets>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Correct" HBox.hgrow="ALWAYS">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#correctHandler" prefHeight="26.0" prefWidth="61.0" text="Correct" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Format" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#formatHandler" text="Format" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Minify" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#minifyHandler" text="Minify" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="XML-&gt;JSON" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#xml2jsonHandler" text="XML-&gt;JSON" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Compress" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#compressHandler" text="Compress" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Decompress" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#decompressHandler" text="Decompress" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </HBox.margin>
@@ -103,7 +104,7 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TextArea fx:id="outputText" editable="false" layoutX="41.0" layoutY="53.0" prefHeight="322.0" prefWidth="290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="0.0" />
+                        <TextFlow fx:id="outputText" prefHeight="524.0" prefWidth="410.0" />
                      </children>
                   </AnchorPane>
               </items>

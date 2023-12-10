@@ -56,10 +56,10 @@ public class Formatting {
         return indentedXML.toString();
     }
     //generate indentation based on the level
-    private static String generateSpaces(int level) {
+    public static String generateSpaces(int level) {
         StringBuilder spaces= new StringBuilder();
         for(int i=0; i<level; i++){
-            spaces.append("    ");
+            spaces.append("\t");
         }
         return spaces.toString();
     }

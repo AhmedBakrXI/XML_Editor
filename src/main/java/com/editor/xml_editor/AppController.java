@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -42,6 +43,7 @@ public class AppController  {
         if (selectedFile != null) {
             try {
                 String fileContent = Files.readString(selectedFile.toPath());
+                editorController.fileContent = fileContent;
                 openFullScreenStage(fileContent);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -115,18 +117,20 @@ public class AppController  {
             /*TextArea textArea = editorController1.inputText;*/
 
             //editorController1.initialize();
-           // editorController1.fakeinitialize();
+            // editorController1.fakeinitialize();
 
             editorController1.setInputText(fileContent);
 
 
 
-                Stage fullScreenStage = new Stage();
-                fullScreenStage.setFullScreen(true);
-                fullScreenStage.setScene(new Scene(root));
-                fullScreenStage.show();
+            Stage fullScreenStage = new Stage();
+            fullScreenStage.getIcons().add(new Image(getClass().getResource("/assets/icon.png").toExternalForm()));
+            fullScreenStage.setTitle("XML Editor");
+            fullScreenStage.setFullScreen(false);
+            fullScreenStage.setScene(new Scene(root));
+            fullScreenStage.show();
 
-                //System.err.println("TextArea in editor.fxml is null");
+            //System.err.println("TextArea in editor.fxml is null");
 
         } catch (IOException e) {
             e.printStackTrace();
