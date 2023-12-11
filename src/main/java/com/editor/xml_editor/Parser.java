@@ -156,11 +156,11 @@ public class Parser {
                 if (correctedXML.get(i).equals("<" + tag + ">")) {
                     if ((tag.equals("id") || tag.equals("name") || tag.equals("body") || tag.equals("topic"))
                             && !correctedXML.get(i + 2).equals("</" + tag + ">")) {
-                        errorTagsIndex.add(i + 2);
+//                        errorTagsIndex.add(i + 2);
                         correctedXML.add(i + 2, "</" + tag + ">");
                         break;
                     } else if (tag.equals("follower") && !correctedXML.get(i + 4).equals("</" + tag + ">")) {
-                        errorTagsIndex.add(i + 4);
+//                        errorTagsIndex.add(i + 4);
                         correctedXML.add(i + 4, "</" + tag + ">");
                         break;
                     } else if (tag.equals("user")) {
@@ -173,7 +173,7 @@ public class Parser {
                             }
                         }
                         correctedXML.add(j, "</" + tag + ">");
-                        errorTagsIndex.add(j);
+//                        errorTagsIndex.add(j);
                         break;
                     } else if (tag.equals("posts")) {
                         int j;
@@ -183,7 +183,7 @@ public class Parser {
                             }
                         }
                         correctedXML.add(j, "</" + tag + ">");
-                        errorTagsIndex.add(j);
+//                        errorTagsIndex.add(j);
                         break;
                     } else if (tag.equals("followers")) {
                         int j;
@@ -193,7 +193,7 @@ public class Parser {
                             }
                         }
                         correctedXML.add(j, "</" + tag + ">");
-                        errorTagsIndex.add(j);
+//                        errorTagsIndex.add(j);
                         break;
                     } else if (tag.equals("topics")) {
                         int j;
@@ -203,7 +203,7 @@ public class Parser {
                             }
                         }
                         correctedXML.add(j, "</" + tag + ">");
-                        errorTagsIndex.add(j);
+//                        errorTagsIndex.add(j);
                         break;
                     }
                 }
@@ -220,6 +220,10 @@ public class Parser {
                 break;
             }
         }
+
+
+        errorTagsIndex = compareArrayLists(xmlParsed, correctedXML);
+
         errorCount = correctedXML.size() - xmlParsed.size();
         System.out.println("Error Count = " + errorCount);
         System.out.println("Error indices: " + errorTagsIndex);
@@ -241,6 +245,23 @@ public class Parser {
         Clip clip = AudioSystem.getClip();
         clip.open(audioInputStream);
         clip.start();
+    }
+
+    private List<Integer> compareArrayLists(List<String> arr1, List<String> arr2) {
+        List<Integer> result = new ArrayList<>();
+        int j = 0;
+        for (int i = 0; i < arr1.size(); i++) {
+            if (arr1.get(i).equals(arr2.get(j))) {
+                j++;
+            } else {
+                while (!arr1.get(i).equals(arr2.get(j))) {
+                    result.add(j);
+                    j++;
+                }
+                j++;
+            }
+        }
+        return result;
     }
 
 //    public static void main(String[] args) {
