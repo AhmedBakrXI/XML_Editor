@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,6 +21,8 @@
             <items>
               <MenuItem fx:id="loadButton" mnemonicParsing="false" onAction="#handleLoadMenuItemAction" text="Load" />
                   <MenuItem mnemonicParsing="false" onAction="#saveHandler" text="Save" />
+                  <MenuItem fx:id="loadButton1" mnemonicParsing="false" onAction="#handleLoadMenuItemAction" text="Undo" />
+                  <MenuItem fx:id="loadButton11" mnemonicParsing="false" onAction="#handleLoadMenuItemAction" text="Redo" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Tools">
@@ -102,11 +105,11 @@
                         <TextArea fx:id="inputText" layoutX="15.2" layoutY="48.0" prefHeight="322.0" prefWidth="290.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                     <children>
-                        <TextFlow fx:id="outputText" prefHeight="524.0" prefWidth="410.0" />
-                     </children>
-                  </AnchorPane>
+                  <ScrollPane prefHeight="478.0" prefWidth="860.0">
+                    <content>
+                              <TextFlow fx:id="outputText" layoutY="0.0" prefHeight="520.0" prefWidth="395.0" />
+                    </content>
+                  </ScrollPane>
               </items>
             </SplitPane>
          </center>
