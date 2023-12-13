@@ -139,6 +139,12 @@ public class AppController  {
 
 
 
+    @FXML
+    void onCopyAndPasteButton(ActionEvent event) {
+
+        openFullScreenStage("");
+
+    }
 
 
 
