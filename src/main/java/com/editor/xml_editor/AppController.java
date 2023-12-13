@@ -104,16 +104,40 @@ public class AppController  {
             e.printStackTrace();
         }
     }*/
+ private void openFullScreenStage(String fileContent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("editor.fxml"));
+            Parent root = loader.load();
 
+            // Accessing the controller of the editor.fxml
+            editorController editorController1 = loader.getController();
+
+            // Assuming TextArea in editor.fxml has the fx:id "inputText"
+            /*TextArea textArea = editorController1.inputText;*/
+
+            //editorController1.initialize();
+            // editorController1.fakeinitialize();
+
+            editorController1.setInputText(fileContent);
+
+
+
+            Stage fullScreenStage = new Stage();
+            fullScreenStage.getIcons().add(new Image(getClass().getResource("/assets/icon.png").toExternalForm()));
+            fullScreenStage.setTitle("XML Editor");
+            fullScreenStage.setFullScreen(false);
+            fullScreenStage.setScene(new Scene(root));
+            fullScreenStage.show();
+
+            //System.err.println("TextArea in editor.fxml is null");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
    
 
 
-    @FXML
-    void onCopyAndPasteButton(ActionEvent event) {
-
-        openFullScreenStage("");
-
-    }
 
 
 
