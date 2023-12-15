@@ -6,7 +6,7 @@ public class Graph {
     private int V;
     private LinkedList<Integer> adj[];
 
-    Graph(int v) {
+    public Graph(int v) {
         V = v;
         adj = new LinkedList[v];
         for(int i=0; i<v; i++) {
@@ -14,11 +14,19 @@ public class Graph {
         }
     }
 
-    void addEdge(int v, int w) {
+    public void addEdge(int v, int w) {
         adj[v].add(w);
     }
 
-    void BFS(int s) {
+    public LinkedList<Integer> getAdj(int v) {
+        return adj[v];
+    }
+
+    public int getV() {
+        return V;
+    }
+
+    public void BFS(int s) {
         boolean visited[] = new boolean[V];
         LinkedList<Integer> queue = new LinkedList<Integer>();
 
@@ -40,7 +48,7 @@ public class Graph {
         }
     }
 
-    void DFSUtil(int v, boolean visited[]) {
+    private void DFSUtil(int v, boolean visited[]) {
         visited[v] = true;
         System.out.print(v + " ");
 
@@ -53,7 +61,7 @@ public class Graph {
         }
     }
 
-    void DFS(int v) {
+    public void DFS(int v) {
         boolean visited[] = new boolean[V];
         DFSUtil(v, visited);
     }
