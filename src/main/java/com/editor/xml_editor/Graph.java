@@ -28,7 +28,7 @@ public class Graph {
 
     public void BFS(int s) {
         boolean visited[] = new boolean[V];
-        LinkedList<Integer> queue = new LinkedList<Integer>();
+        LinkedList<Integer> queue = new LinkedList<>();
 
         visited[s] = true;
         queue.add(s);
@@ -60,6 +60,7 @@ public class Graph {
             }
         }
     }
+
 
     public void DFS(int v) {
         boolean visited[] = new boolean[V];

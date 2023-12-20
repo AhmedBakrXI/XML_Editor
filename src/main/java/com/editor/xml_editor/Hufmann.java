@@ -1,3 +1,4 @@
+package com.editor.xml_editor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;

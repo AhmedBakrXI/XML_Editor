@@ -1,11 +1,12 @@
 package com.editor.xml_editor;
 
-import javafx.event.ActionEvent;
+import com.editor.data.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.stage.FileChooser;
@@ -20,28 +21,37 @@ import java.util.ResourceBundle;
 
 public class editorController implements Initializable {
     public static String fileContent;
+    static File inputFile;
     @FXML
     protected TextArea inputText;
     @FXML
     protected TextFlow outputText;
-
-    static File inputFile;
+    @FXML
+    protected MenuItem loadButton;
     Parser parser;
     List<Integer> errorList;
     List<String> xmlList;
 
-
-    @FXML
-    MenuItem loadButton;
+    List<User> users;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         inputText = getTextArea();
         // Initialize the TextArea with some default text if needed
         inputText.setText("Hello World");
+        outputText.setPrefWidth(Region.USE_COMPUTED_SIZE);
         parser = new Parser();
         parser.parseXML(fileContent);
         errorList = parser.correctXML();
+        users = new ArrayList<>();
+
+        List<String> xmlUsers = parser.getUserList();
+        for (int i = 0; i < users.size(); i++) {
+            users.get(i).setUserXML(xmlUsers.get(i));
+        }
+
+
+        Undo_Redo.puch_Stack(fileContent);
     }
 
     private TextArea getTextArea() {
@@ -56,22 +66,6 @@ public class editorController implements Initializable {
     public void setInputText(String input) {
         // Set the text of the TextArea
         inputText.setText(input);
-    }
-
-    @FXML
-    private void handleLoadMenuItemAction() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose a File");
-        File selectedFile = fileChooser.showOpenDialog(loadButton.getParentPopup().getOwnerWindow());
-
-        if (selectedFile != null) {
-            try {
-                String fileContent = Files.readString(selectedFile.toPath());
-                setInputText(fileContent);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
 
@@ -134,7 +128,7 @@ public class editorController implements Initializable {
         Text minifiedText = new Text(minified);
         Font font = Font.font("Consolas", 12);
         minifiedText.setFont(font);
-        minifiedText.setFill(Color.rgb(200,0,0));
+        minifiedText.setFill(Color.rgb(200, 0, 0));
 
 
         outputText.getChildren().clear();
@@ -142,6 +136,9 @@ public class editorController implements Initializable {
     }
 
     public void xml2jsonHandler() {
+        String json = Formatting.xmlToJSON(inputText.getText());
+        outputText.getChildren().clear();
+        outputText.getChildren().add(new Text(json));
     }
 
     public void compressHandler() {
@@ -164,8 +161,8 @@ public class editorController implements Initializable {
 
         Hufmann hufmann = new Hufmann(xml);
         String encoded = hufmann.get_xml_encode();
-        Decompress decompresser = new Decompress(hufmann.getRoot());
-        String decodedString = decompresser.decode(encoded);
+        Decompress decompressor = new Decompress(hufmann.getRoot());
+        String decodedString = decompressor.decode(encoded);
 
         Text decodedText = new Text(decodedString);
         decodedText.setFill(Color.rgb(152, 0, 152));
@@ -197,7 +194,7 @@ public class editorController implements Initializable {
                 } else if (Parser.isClosingTag(s)) {
                     level--;
                     indent = Formatting.generateSpaces(level);
-                    if ((i+1) < xml.size()) {
+                    if ((i + 1) < xml.size()) {
                         if (Parser.isTag(xml.get(i + 1))) {
                             if (!Parser.isClosingTag(xml.get(i + 1))) {
                                 level--;
@@ -216,12 +213,55 @@ public class editorController implements Initializable {
 
     public void saveHandler() throws IOException {
         fileContent = inputText.getText();
+        Undo_Redo.puch_Stack(fileContent);
         parser = new Parser();
         parser.parseXML(fileContent);
         errorList = parser.correctXML();
+        users = new ArrayList<>();
+
+        List<String> xmlUsers = parser.getUserList();
+        for (int i = 0; i < users.size(); i++) {
+            users.get(i).setUserXML(xmlUsers.get(i));
+        }
+
         outputText.getChildren().clear();
         outputText.getChildren().add(new Text(fileContent));
         FileHandler.writeFile(inputFile.getPath(), fileContent);
+    }
+
+    public void undoHandler() {
+        String undo = Undo_Redo.Undo_is_clicked();
+        if (undo != null) {
+            outputText.getChildren().clear();
+            outputText.getChildren().add(new Text(undo));
+        }
+    }
+
+    public void redoHandler() {
+        String redo = Undo_Redo.Redo_is_clicked();
+        if (redo != null) {
+            outputText.getChildren().clear();
+            outputText.getChildren().add(new Text(redo));
+        }
+    }
+
+    public void loadHandler() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose a File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files (*.xml)", "*.xml"));
+        File selectedFile = fileChooser.showOpenDialog(loadButton.getParentPopup().getScene().getWindow());
+        editorController.inputFile = selectedFile;
+        if (selectedFile != null) {
+            try {
+                String fileContent = Files.readString(selectedFile.toPath());
+                editorController.fileContent = fileContent;
+                inputText.setText(fileContent);
+                outputText.getChildren().clear();
+                outputText.getChildren().add(new Text(fileContent));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 

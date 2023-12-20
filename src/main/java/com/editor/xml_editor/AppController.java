@@ -38,6 +38,7 @@ public class AppController  {
     private void handleBrowseButtonAction(MouseEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose a File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML Files (*.xml)", "*.xml"));
         File selectedFile = fileChooser.showOpenDialog(BrowseButton.getScene().getWindow());
         editorController.inputFile = selectedFile;
         if (selectedFile != null) {
