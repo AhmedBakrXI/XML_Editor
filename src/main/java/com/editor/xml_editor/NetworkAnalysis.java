@@ -9,14 +9,17 @@ public class NetworkAnalysis {
         this.g = g;
     }
 
-    public int mostInfluencer() {
+    public int getMostInfluencer() {
         // we can't simply loop through all users and find the one with that's following the most users
         // because the user with the most followers might not be following anyone
         // so we need to loop through all users and find the one with the most followers
         int[] followers = new int[g.getV()];
         for(int i = 0; i < g.getV(); i++) {
             LinkedList<Integer> adj = g.getAdj(i);
-            followers[i] = adj.size();
+            for(int j = 0; j < adj.size(); j++) {
+                int follower = adj.get(j);
+                followers[follower]++;
+            }
         }
 
         // now we have an array of followers, we can loop through it and find the user with the most followers
@@ -33,7 +36,7 @@ public class NetworkAnalysis {
     }
 
     // who is the most active user (connected to lots of users)
-    public int mostActive() {
+    public int getMostActive() {
         // loop through all users and find the one with the most connections
         int mostActive = -1;
         int maxConnections = 0;
@@ -52,7 +55,7 @@ public class NetworkAnalysis {
     }
 
     // the mutual followers between 2 users
-    public LinkedList<Integer> mutualFollowers(int u1, int u2) {
+    public LinkedList<Integer> getMutualFollowers(int u1, int u2) {
         // loop through all followers of u1 and check if they are also followers of u2
         int[] followersOfU1 = new int[g.getV()];
         int[] followersOfU2 = new int[g.getV()];
@@ -80,7 +83,7 @@ public class NetworkAnalysis {
     }
 
     // for each user, suggest a list of users to follow (the followers of his followers)
-    public LinkedList<Integer> suggestFollowers(int u) {
+    public LinkedList<Integer> getSuggestFollowers(int u) {
         // loop through all followers of u and find their followers
         LinkedList<Integer> followers = g.getAdj(u);
         LinkedList<Integer> suggestedFollowers = new LinkedList<Integer>();
