@@ -19,10 +19,10 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem fx:id="loadButton" mnemonicParsing="false" onAction="#handleLoadMenuItemAction" text="Load" />
+              <MenuItem fx:id="loadButton" mnemonicParsing="false" onAction="#loadHandler" text="Load" />
                   <MenuItem mnemonicParsing="false" onAction="#saveHandler" text="Save" />
-                  <MenuItem fx:id="loadButton1" mnemonicParsing="false" onAction="#handleLoadMenuItemAction" text="Undo" />
-                  <MenuItem fx:id="loadButton11" mnemonicParsing="false" onAction="#handleLoadMenuItemAction" text="Redo" />
+                  <MenuItem fx:id="undoBtn" mnemonicParsing="false" onAction="#undoHandler" text="Undo" />
+                  <MenuItem fx:id="redoBtn" mnemonicParsing="false" onAction="#redoHandler" text="Redo" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Tools">
