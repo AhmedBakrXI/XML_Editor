@@ -1,5 +1,7 @@
 package com.editor.xml_editor;
 
+import com.editor.Json.XML2JSON;
+import com.editor.Json.XMLTree;
 import com.editor.data.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -49,7 +51,6 @@ public class editorController implements Initializable {
         for (int i = 0; i < users.size(); i++) {
             users.get(i).setUserXML(xmlUsers.get(i));
         }
-
 
         Undo_Redo.puch_Stack(fileContent);
     }
@@ -136,7 +137,10 @@ public class editorController implements Initializable {
     }
 
     public void xml2jsonHandler() {
-        String json = Formatting.xmlToJSON(inputText.getText());
+        String xmlModified = list2String();
+        XMLTree xmlTree = new XMLTree(xmlModified);
+        XML2JSON xml2JSON = new XML2JSON(xmlTree);
+        String json = xml2JSON.getJsonString();
         outputText.getChildren().clear();
         outputText.getChildren().add(new Text(json));
     }
@@ -262,6 +266,24 @@ public class editorController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    private String list2String() {
+        List<String> list = parser.getXmlParsed();
+        StringBuilder xmlBuilder = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.size() > (i + 1)) {
+                if (!Parser.isTag(list.get(i + 1))) {
+                    xmlBuilder.append(list.get(i))
+                            .append(list.get(i + 1))
+                            .append("\n");
+                } else {
+                    xmlBuilder.append(list.get(i)).append("\n");
+                }
+            }
+        }
+        System.out.println(xmlBuilder);
+        return xmlBuilder.toString();
     }
 }
 
