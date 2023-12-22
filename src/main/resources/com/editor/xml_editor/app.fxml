@@ -66,7 +66,7 @@
                               <Insets bottom="12.0" top="12.0" />
                            </VBox.margin>
                         </Line>
-                        <Button fx:id="CopyPasteButton" mnemonicParsing="false" style="-fx-background-color: #d02f60; -fx-border-radius: 100px;" text="📋 Copy and Paste" textFill="WHITE">
+                        <Button fx:id="CopyPasteButton" mnemonicParsing="false" onAction="#onCopyAndPasteButton" style="-fx-background-color: #d02f60; -fx-border-radius: 100px;" text="📋 Copy and Paste" textFill="WHITE">
                            <font>
                               <Font name="Fira Code Bold" size="18.0" />
                            </font>

@@ -16,6 +16,11 @@ public class User {
 
     private String userXML;
 
+    private double x; // X-coordinate
+    private double y; // Y-coordinate
+
+
+
     public User() {
         followers = new ArrayList<>();
         posts = new ArrayList<>();
@@ -80,6 +85,12 @@ public class User {
                 }
             }
         }
+    }
+
+
+    public void setCoordinates(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
     public List<Post> getPosts() {
@@ -156,5 +167,21 @@ public class User {
                 }
             }
         }
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 }
