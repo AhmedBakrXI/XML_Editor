@@ -47,6 +47,7 @@ public class editorController implements Initializable {
     List<User> users;
 
     List<User> testUsers;
+    List<String> xmlUsers;
 
 
     @Override
@@ -59,11 +60,8 @@ public class editorController implements Initializable {
         parser.parseXML(fileContent);
         errorList = parser.correctXML();
         users = new ArrayList<>();
+        xmlUsers = parser.getUserList();
 
-        List<String> xmlUsers = parser.getUserList();
-        for (int i = 0; i < users.size(); i++) {
-            users.get(i).setUserXML(xmlUsers.get(i));
-        }
 /*
         for (User user : users) {
             user.setFollowers(users);
@@ -74,66 +72,76 @@ public class editorController implements Initializable {
 */
 
 
-        setUsersSample(); // setting the users list to test visualising
+//        setUsersSample(); // setting the users list to test visualising
 
 
         Undo_Redo.puch_Stack(fileContent);
     }
     private void setUsersSample (){
-        //initialze the testUsers list
         testUsers = new ArrayList<>();
+
+        for(String userData : xmlUsers) {
+            User user = new User();
+            user.setUserXML(userData);
+            user.parseData();
+            testUsers.add(user);
+        }
+
+        for (User user : testUsers) {
+            user.setFollowers(testUsers);
+        }
 
 
         // Create a sample of users for visualization
-        User user1 = new User();
-        user1.setId(1);
-        user1.setUsername("User1");
-
-        User user2 = new User();
-        user2.setId(2);
-        user2.setUsername("User2");
-
-        User user3 = new User();
-        user3.setId(3);
-        user3.setUsername("User3");
-
-        User user4 = new User();
-        user4.setId(4);
-        user4.setUsername("User4");
-
-        User user5 = new User();
-        user5.setId(5);
-        user5.setUsername("User5");
-
-
-        User user6 = new User();
-        user6.setId(6);
-        user6.setUsername("User6");
-
-
-        User user7 = new User();
-        user7.setId(7);
-        user7.setUsername("User7");
-
-
-        User user8 = new User();
-        user8.setId(8);
-        user8.setUsername("User8");
-
-
-        // Establish some connections in the sample
-        user1.getFollowers().add(user2);
-        user2.getFollowers().add(user1);
-        user3.getFollowers().add(user2);
-        user3.getFollowers().add(user1);
-        user4.getFollowers().add(user2);
-
-        // Add the sample users to the users list
-        testUsers.add(user1);
-        testUsers.add(user2);
-      testUsers.add(user3);
-        testUsers.add(user4);
-        testUsers.add(user5);
+//        User user1 = new User();
+//        user1.setId(1);
+//        user1.setUsername("User1");
+//
+//        User user2 = new User();
+//        user2.setId(2);
+//        user2.setUsername("User2");
+//
+//        User user3 = new User();
+//        user3.setId(3);
+//        user3.setUsername("User3");
+//
+//        User user4 = new User();
+//        user4.setId(4);
+//        user4.setUsername("User4");
+//
+//        User user5 = new User();
+//        user5.setId(5);
+//        user5.setUsername("User5");
+//
+//
+//        User user6 = new User();
+//        user6.setId(6);
+//        user6.setUsername("User6");
+//
+//
+//        User user7 = new User();
+//        user7.setId(7);
+//        user7.setUsername("User7");
+//
+//
+//        User user8 = new User();
+//        user8.setId(8);
+//        user8.setUsername("User8");
+//
+//
+//        // Establish some connections in the sample
+//        user1.getFollowers().add(user2);
+//        user2.getFollowers().add(user1);
+//        user3.getFollowers().add(user2);
+//        user3.getFollowers().add(user1);
+//        user4.getFollowers().add(user2);
+//
+//        // Add the sample users to the users list
+//        testUsers.add(user1);
+//        testUsers.add(user2);
+//      testUsers.add(user3);
+//        testUsers.add(user4);
+//        testUsers.add(user5);
       /*  testUsers.add(user6);
         testUsers.add(user7);
         testUsers.add(user8);
@@ -309,11 +317,13 @@ public class editorController implements Initializable {
         parser.parseXML(fileContent);
         errorList = parser.correctXML();
         users = new ArrayList<>();
+        xmlUsers = new ArrayList<>();
+        xmlUsers = parser.getUserList();
 
-        List<String> xmlUsers = parser.getUserList();
         for (int i = 0; i < users.size(); i++) {
             users.get(i).setUserXML(xmlUsers.get(i));
         }
+
 
         outputText.getChildren().clear();
         outputText.getChildren().add(new Text(fileContent));
@@ -369,12 +379,12 @@ public class editorController implements Initializable {
                 }
             }
         }
-        System.out.println(xmlBuilder);
         return xmlBuilder.toString();
     }
 
     private Pane graphPane;
     public void VisualizeMyGraph(ActionEvent actionEvent) {
+        setUsersSample();
         // Create a new stage for visualization
         Stage graphStage = new Stage();
         graphStage.setTitle("Social Network Graph Visualization");
