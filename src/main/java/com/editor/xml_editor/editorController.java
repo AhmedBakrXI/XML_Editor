@@ -1,19 +1,17 @@
 package com.editor.xml_editor;
 
+import com.editor.Compression.HuffmanCompression;
 import com.editor.Json.XML2JSON;
 import com.editor.Json.XMLTree;
 import com.editor.data.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -27,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -46,9 +45,9 @@ public class editorController implements Initializable {
 
     List<User> users;
 
-    List<User> testUsers;
     List<String> xmlUsers;
-
+    NetworkAnalysis networkAnalysis;
+    private Pane graphPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,96 +61,22 @@ public class editorController implements Initializable {
         users = new ArrayList<>();
         xmlUsers = parser.getUserList();
 
-/*
-        for (User user : users) {
-            user.setFollowers(users);
-        }
-
-        System.out.println(users.get(0).getFollowers() );
-
-*/
-
-
-//        setUsersSample(); // setting the users list to test visualising
-
-
         Undo_Redo.puch_Stack(fileContent);
     }
-    private void setUsersSample (){
-        testUsers = new ArrayList<>();
 
-        for(String userData : xmlUsers) {
+    private void setUsersSample() {
+        users = new ArrayList<>();
+
+        for (String userData : xmlUsers) {
             User user = new User();
             user.setUserXML(userData);
             user.parseData();
-            testUsers.add(user);
+            users.add(user);
         }
 
-        for (User user : testUsers) {
-            user.setFollowers(testUsers);
+        for (User user : users) {
+            user.setFollowers(users);
         }
-
-
-        // Create a sample of users for visualization
-//        User user1 = new User();
-//        user1.setId(1);
-//        user1.setUsername("User1");
-//
-//        User user2 = new User();
-//        user2.setId(2);
-//        user2.setUsername("User2");
-//
-//        User user3 = new User();
-//        user3.setId(3);
-//        user3.setUsername("User3");
-//
-//        User user4 = new User();
-//        user4.setId(4);
-//        user4.setUsername("User4");
-//
-//        User user5 = new User();
-//        user5.setId(5);
-//        user5.setUsername("User5");
-//
-//
-//        User user6 = new User();
-//        user6.setId(6);
-//        user6.setUsername("User6");
-//
-//
-//        User user7 = new User();
-//        user7.setId(7);
-//        user7.setUsername("User7");
-//
-//
-//        User user8 = new User();
-//        user8.setId(8);
-//        user8.setUsername("User8");
-//
-//
-//        // Establish some connections in the sample
-//        user1.getFollowers().add(user2);
-//        user2.getFollowers().add(user1);
-//        user3.getFollowers().add(user2);
-//        user3.getFollowers().add(user1);
-//        user4.getFollowers().add(user2);
-//
-//        // Add the sample users to the users list
-//        testUsers.add(user1);
-//        testUsers.add(user2);
-//      testUsers.add(user3);
-//        testUsers.add(user4);
-//        testUsers.add(user5);
-      /*  testUsers.add(user6);
-        testUsers.add(user7);
-        testUsers.add(user8);
-        for (int i=1 ; i<5 ; i++)
-        testUsers.add(new User());
-*/
-    }
-
-    private TextArea getTextArea() {
-        return (TextArea) this.inputText.getParent().lookup("#inputText");
     }
 
     // Assuming you want to expose this TextArea
@@ -159,11 +84,14 @@ public class editorController implements Initializable {
 
     // This TextArea is used internally
 
+    private TextArea getTextArea() {
+        return (TextArea) this.inputText.getParent().lookup("#inputText");
+    }
+
     public void setInputText(String input) {
         // Set the text of the TextArea
         inputText.setText(input);
     }
-
 
     public void consistencyCheckHandler() {
         boolean check = parser.checkConsistency(parser.getXmlParsed());
@@ -215,7 +143,6 @@ public class editorController implements Initializable {
         }
     }
 
-
     public void minifyHandler() {
         List<String> list = parser.getCorrectedXML();
         String xml = Parser.listToString(list);
@@ -241,11 +168,13 @@ public class editorController implements Initializable {
     }
 
     public void compressHandler() {
-        List<String> list = parser.getCorrectedXML();
-        String xml = Parser.listToString(list);
-
-        Hufmann hufmann = new Hufmann(xml);
-        String encodedString = hufmann.get_xml_encode();
+        HuffmanCompression.compress(fileContent, new File("compressed.txt"));
+        String encodedString = null;
+        try {
+            encodedString = FileHandler.readFile("compressed.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         Text encodedText = new Text(encodedString);
         encodedText.setFill(Color.BLUEVIOLET);
@@ -258,10 +187,13 @@ public class editorController implements Initializable {
         List<String> list = parser.getCorrectedXML();
         String xml = Parser.listToString(list);
 
-        Hufmann hufmann = new Hufmann(xml);
-        String encoded = hufmann.get_xml_encode();
-        Decompress decompressor = new Decompress(hufmann.getRoot());
-        String decodedString = decompressor.decode(encoded);
+        HuffmanCompression.decompress(new File("compressed.txt"), new File("decompressed.txt"));
+        String decodedString = null;
+        try {
+            decodedString = FileHandler.readFile("decompressed.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         Text decodedText = new Text(decodedString);
         decodedText.setFill(Color.rgb(152, 0, 152));
@@ -278,7 +210,6 @@ public class editorController implements Initializable {
         }
         return colorText;
     }
-
 
     private List<String> indentList(List<String> xml) {
         List<String> result = new ArrayList<>();
@@ -382,7 +313,6 @@ public class editorController implements Initializable {
         return xmlBuilder.toString();
     }
 
-    private Pane graphPane;
     public void VisualizeMyGraph(ActionEvent actionEvent) {
         setUsersSample();
         // Create a new stage for visualization
@@ -390,9 +320,9 @@ public class editorController implements Initializable {
         graphStage.setTitle("Social Network Graph Visualization");
 
         // Set dimensions for the stage (you can adjust these values)
-        double sceneWidth = 800;
+        double sceneWidth = 1000;
         double sceneHeight = 600;
-            //graphStage.setMaximized(true);
+        //graphStage.setMaximized(true);
         // Create a new Pane for the graph
         Pane graphScenePane = new Pane();
 
@@ -406,9 +336,8 @@ public class editorController implements Initializable {
         graphStage.show();
 
         // Visualize the graph within the created stage
-        visualizeGraph(testUsers, graphScenePane, sceneWidth, sceneHeight);
+        visualizeGraph(users, graphScenePane, sceneWidth, sceneHeight);
     }
-
 
 
     public void visualizeGraph(List<User> userList, Pane graphScenePane, double sceneWidth, double sceneHeight) {
@@ -481,7 +410,7 @@ public class editorController implements Initializable {
                 graphScenePane.getChildren().add(connection);
 
                 // Draw arrowhead in red at the nearest point of the current user
-                addArrowHead(graphScenePane,  followerX, followerY,nearestXCurrentUser, nearestYCurrentUser, 10, Color.RED);
+                addArrowHead(graphScenePane, followerX, followerY, nearestXCurrentUser, nearestYCurrentUser, 10, Color.RED);
             }
         }
     }
@@ -506,5 +435,193 @@ public class editorController implements Initializable {
     }
 
 
-}
+    public void graphHandler() {
+        setUsersSample();
+        Graph graph = new Graph(100);
 
+        for (User user : users) {
+            for (User follower : user.getFollowers()) {
+                graph.addEdge(follower.getId(), user.getId());
+            }
+        }
+
+        networkAnalysis = new NetworkAnalysis(graph);
+        int mostActive = networkAnalysis.getMostActive() + 1;
+        int mostInfluencer = networkAnalysis.getMostInfluencer();
+
+        User mostActiveUser = getUserByID(mostActive);
+        User mostInfluencerUser = getUserByID(mostInfluencer);
+
+//        int mostInfluencer = networkAnalysis.getMostInfluencer();
+//        User mostInfluencerUser = getUserByID(mostInfluencer);
+//        System.out.println("Most Influencer: " + mostInfluencerUser.getUsername());
+
+        // Graph window
+        Stage stage = new Stage();
+        Pane pane = new Pane();
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
+        stage.setTitle("Graph Window");
+        stage.show();
+
+        Font font = Font.font("Consolas", 18);
+        Text mostActiveText = new Text("Most Active User: " + mostActiveUser.getUsername() + "\n");
+        Text mostInfluencerText = new Text("Most Influencer: " + mostInfluencerUser.getUsername() + "\n");
+        mostActiveText.setFill(Color.RED);
+        mostInfluencerText.setFill(Color.GREEN);
+        mostActiveText.setFont(font);
+        mostInfluencerText.setFont(font);
+
+        Text mutualText = new Text("Mutual Followers: \n" + mutualFollowersStringBuilder());
+        mutualText.setFont(font);
+        mutualText.setFill(Color.BLUEVIOLET);
+
+        Text suggestText = new Text("Suggested Followers: \n" + suggestedFollowersStringBuilder());
+        suggestText.setFont(font);
+        suggestText.setFill(Color.ORANGE);
+
+        TextFlow textFlow = new TextFlow();
+        textFlow.getChildren().addAll(mostActiveText,
+                mostInfluencerText,
+                mutualText,
+                suggestText);
+        pane.getChildren().add(textFlow);
+
+    }
+
+    private User getUserByID(int id) {
+        User result = null;
+        for (User user : users) {
+            if (user.getId() == id) {
+                result = user;
+                break;
+            }
+        }
+        return result;
+    }
+
+    private User getMostInfluencer() {
+        int mostInfluencer = 0;
+        User result = null;
+        for (User user : users) {
+            int followers = user.getFollowersID().size();
+            if (mostInfluencer < followers) {
+                mostInfluencer = followers;
+                result = user;
+            }
+        }
+        return result;
+    }
+
+    private String mutualFollowersStringBuilder() {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < users.size(); i++) {
+            for (int j = i + 1; j < users.size(); j++) {
+                result.append(users.get(i).getUsername())
+                        .append(", ")
+                        .append(users.get(j).getUsername())
+                        .append(": ")
+                        .append(networkAnalysis.getMutualFollowers(
+                                users.get(i).getId() - 1,
+                                users.get(j).getId() - 1
+                        ))
+                        .append("\n");
+            }
+        }
+        return result.toString();
+    }
+
+    private String suggestedFollowersStringBuilder() {
+        StringBuilder result = new StringBuilder();
+        for (User user : users) {
+            result.append(user.getUsername())
+                    .append(": ")
+                    .append(networkAnalysis.getSuggestFollowers(user.getId() - 1))
+                    .append("\n");
+        }
+        return result.toString();
+    }
+
+    public void searchPosts() {
+        setUsersSample();
+        Stage searchStage = new Stage();
+        HBox row1 = new HBox();
+        HBox row2 = new HBox();
+        row1.setSpacing(15);
+        row1.setPadding(new Insets(15));
+        row2.setSpacing(15);
+        row2.setPadding(new Insets(15));
+
+        Button searchTopic = new Button("Search by Topic");
+        Button searchBody = new Button("Search by Body");
+        row2.getChildren().addAll(searchBody, searchTopic);
+
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPrefHeight(350);
+        TextFlow textFlow = new TextFlow();
+
+        VBox vBox = new VBox();
+        vBox.setPadding(new Insets(15));
+        vBox.setSpacing(10);
+        Text searchLabel = new Text("Search for: ");
+        TextField searchField = new TextField("Enter body or topic");
+        searchField.setPrefWidth(200);
+        row1.getChildren().addAll(searchLabel, searchField);
+
+        // Action handlers
+        searchTopic.setOnAction(e -> {
+            String result = "";
+            String search = searchField.getText().trim();
+            List<String> usersSearch = Post_search.searchForTopic(users, search);
+            Text resultText = new Text();
+            Color color = Color.WHITE;
+            for (String r : usersSearch) {
+                result += r;
+                color = Color.GREEN;
+            }
+
+            if (usersSearch.size() == 0) {
+                result = "Can't find any posts";
+                color = Color.BLUE;
+            }
+
+            resultText.setText(result);
+            resultText.setFill(color);
+
+
+            textFlow.getChildren().clear();
+            textFlow.getChildren().add(resultText);
+        });
+
+        searchBody.setOnAction(e -> {
+            String result = "";
+            String search = searchField.getText().trim();
+            List<String> usersSearch = Post_search.searchForBody(users, search);
+            Text resultText = new Text();
+            Color color = Color.WHITE;
+            for (String r : usersSearch) {
+                result += r;
+                color = Color.GREEN;
+            }
+            if (usersSearch.size() == 0) {
+                result = "Can't find any posts";
+                color = Color.BLUE;
+            }
+
+            resultText.setText(result);
+            resultText.setFill(color);
+
+
+            textFlow.getChildren().clear();
+            textFlow.getChildren().add(resultText);
+        });
+
+        scrollPane.setContent(textFlow);
+        vBox.getChildren().addAll(row1, row2, scrollPane);
+        Scene scene = new Scene(vBox, 400, 600);
+        searchStage.setScene(scene);
+        searchStage.show();
+    }
+}

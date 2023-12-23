@@ -1,5 +1,10 @@
 package com.editor.xml_editor;
+import com.editor.data.Post;
+import com.editor.data.User;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Post_search {
     static LinkedList<String> PostList = new LinkedList<>();
@@ -47,5 +52,47 @@ public class Post_search {
             count++;
         }
         return count;
+    }
+
+    public static List<String> searchForTopic(List<User> users, String topic) {
+        List<String> result = new ArrayList<>();
+
+        for (User user : users) {
+            List<Post> posts = user.getPosts();
+            for (Post post : posts) {
+                for (String userTopic : post.getTopics()) {
+                    String temp = userTopic.trim().toLowerCase();
+                    if (temp.equals(topic.toLowerCase())) {
+                        String postResult = user.getUsername() + ":\n{ "
+                                + post.getBody() + " }\n\n";
+                        result.add(postResult);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public static List<String> searchForBody(List<User> users, String body) {
+        List<String> result = new ArrayList<>();
+
+        for (User user : users) {
+            List<Post> posts = user.getPosts();
+            for (Post post : posts) {
+                String bodyOfPost = post.getBody();
+                String temp = bodyOfPost.toLowerCase();
+                if (temp.contains(body.toLowerCase())) {
+                    String postResult = user.getUsername() + ":\n{ "
+                            + post.getBody() + " }\n"
+                            + "topics: "
+                            + post.getTopics()
+                            + "\n\n";
+                    result.add(postResult);
+                }
+            }
+        }
+
+        return result;
     }
 }

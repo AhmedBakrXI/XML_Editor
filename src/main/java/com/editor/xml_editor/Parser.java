@@ -129,7 +129,7 @@ public class Parser {
             if (isTag(tag)) {
                 if (isOpeningTag(tag)) {
                     tagStack.push(tag);
-                } else if (isClosingTag(tag)) {
+                } else if (isClosingTag(tag) && !tagStack.isEmpty()) {
                     String openingTag = tagStack.pop();
                     openingTag = openingTag.substring(openingTag.indexOf("<") + 1, openingTag.indexOf(">"));
                     String closingTag = tag.substring(tag.indexOf("</") + 2, tag.indexOf(">"));
@@ -138,6 +138,8 @@ public class Parser {
                         System.out.println(replaceError);
                         return false;
                     }
+                } else {
+                    return false;
                 }
             }
             i++;
@@ -205,7 +207,7 @@ public class Parser {
                 }
             }
             counter++;
-            if (counter == 10) {
+            if ((counter == 10)) {
                 System.out.println("Can't correct");
                 try {
                     runAlarm();
@@ -218,11 +220,7 @@ public class Parser {
 
 
         errorTagsIndex = compareArrayLists(xmlParsed, correctedXML);
-
         errorCount = correctedXML.size() - xmlParsed.size();
-        System.out.println("Error Count = " + errorCount);
-        System.out.println("Error indices: " + errorTagsIndex);
-        System.out.println(correctedXML);
         return errorTagsIndex;
     }
 

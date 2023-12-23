@@ -9,13 +9,13 @@ public class Graph {
     public Graph(int v) {
         V = v;
         adj = new LinkedList[v];
-        for(int i=0; i<v; i++) {
-            adj[i] = new LinkedList();
+        for (int i = 0; i < v; i++) {
+            adj[i] = new LinkedList<>();
         }
     }
 
     public void addEdge(int v, int w) {
-        adj[v].add(w);
+        adj[v-1].add(w);
     }
 
     public LinkedList<Integer> getAdj(int v) {
@@ -33,14 +33,14 @@ public class Graph {
         visited[s] = true;
         queue.add(s);
 
-        while(queue.size() != 0) {
+        while (queue.size() != 0) {
             s = queue.poll();
             System.out.print(s + " ");
 
             Iterator<Integer> i = adj[s].listIterator();
-            while(i.hasNext()) {
+            while (i.hasNext()) {
                 int n = i.next();
-                if(!visited[n]) {
+                if (!visited[n]) {
                     visited[n] = true;
                     queue.add(n);
                 }
@@ -53,17 +53,24 @@ public class Graph {
         System.out.print(v + " ");
 
         Iterator<Integer> i = adj[v].listIterator();
-        while(i.hasNext()) {
+        while (i.hasNext()) {
             int n = i.next();
-            if(!visited[n]) {
+            if (!visited[n]) {
                 DFSUtil(n, visited);
             }
         }
     }
 
-
     public void DFS(int v) {
         boolean visited[] = new boolean[V];
         DFSUtil(v, visited);
+    }
+
+    @Override
+    public String toString() {
+        return "Graph{" +
+                "V=" + V +
+                ", adj=" + Arrays.toString(adj) +
+                '}';
     }
 }
