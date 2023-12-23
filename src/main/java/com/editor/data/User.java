@@ -101,16 +101,6 @@ public class User {
         this.posts = posts;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id + "\n" +
-                ", username='" + username + '\'' + "\n" +
-                ", followers=" + followers + "\n" +
-                ", followersID=" + followersID + "\n" +
-                ", posts=" + posts + "\n" +
-                '}';
-    }
 
     public void parseData() {
         String[] user = userXML.split("\n");
@@ -183,5 +173,9 @@ public class User {
 
     public void setY(double y) {
         this.y = y;
+    }
+
+    public List<Integer> getFollowersID() {
+        return followersID;
     }
 }
