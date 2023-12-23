@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.editor.xml_editor.editorController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.editor.xml_editor.editorController">
    <children>
       <MenuBar maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.6" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -28,6 +28,7 @@
           <Menu mnemonicParsing="false" text="Tools">
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem mnemonicParsing="false" onAction="#searchPosts" text="Search Posts" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -82,7 +83,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Graph" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#graphHandler" text="Graph" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </HBox.margin>
