@@ -62,7 +62,7 @@ public class Post_search {
             for (Post post : posts) {
                 for (String userTopic : post.getTopics()) {
                     String temp = userTopic.trim().toLowerCase();
-                    if (temp.equals(topic.toLowerCase())) {
+                    if (temp.contains(topic.toLowerCase())) {
                         String postResult = user.getUsername() + ":\n{ "
                                 + post.getBody() + " }\n\n";
                         result.add(postResult);
