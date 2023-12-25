@@ -64,6 +64,9 @@ public class editorController implements Initializable {
         Undo_Redo.puch_Stack(fileContent);
     }
 
+    /**
+     * sets the user sample to be used
+     */
     private void setUsersSample() {
         users = new ArrayList<>();
 
@@ -92,7 +95,7 @@ public class editorController implements Initializable {
         // Set the text of the TextArea
         inputText.setText(input);
     }
-
+    
     public void consistencyCheckHandler() {
         boolean check = parser.checkConsistency(parser.getXmlParsed());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -135,10 +138,24 @@ public class editorController implements Initializable {
 
         outputText.getChildren().clear();
         List<String> indentation = indentList(xmlList);
+        Color color;
         for (int i = 0; i < xmlList.size(); i++) {
+            if (indentation.get(i).equals("")) {
+                color = Color.rgb(30, 144, 255);
+            } else if (indentation.get(i).equals("\t")) {
+                color = Color.rgb(0, 128, 0);
+            } else if (indentation.get(i).equals("\t\t")) {
+                color = Color.rgb(255, 130, 0);
+            } else if (indentation.get(i).equals("\t\t\t")) {
+                color = Color.rgb(255, 99, 71);
+            } else if (indentation.get(i).equals("\t\t\t\t")) {
+                color = Color.rgb(244, 40, 90);
+            } else {
+                color = Color.rgb(148, 0, 211);
+            }
             String s = xmlList.get(i);
             outputText.getChildren().add(new Text(indentation.get(i)));
-            outputText.getChildren().add(colorText(s));
+            outputText.getChildren().add(colorText(s, color));
             outputText.getChildren().add(new Text("\n"));
         }
     }
@@ -202,11 +219,11 @@ public class editorController implements Initializable {
         outputText.getChildren().add(decodedText);
     }
 
-    private Text colorText(String text) {
+    private Text colorText(String text, Color color) {
         Text colorText = new Text(text);
         colorText.setFont(Font.font("Consolas", FontWeight.BOLD, 14));
         if (Parser.isTag(text)) {
-            colorText.setFill(Color.rgb(0, 120, 215));
+            colorText.setFill(color);
         }
         return colorText;
     }
@@ -552,6 +569,7 @@ public class editorController implements Initializable {
         row1.setPadding(new Insets(15));
         row2.setSpacing(15);
         row2.setPadding(new Insets(15));
+
 
         Button searchTopic = new Button("Search by Topic");
         Button searchBody = new Button("Search by Body");
