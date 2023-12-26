@@ -45,8 +45,27 @@ This project is a part of the Data Structures and Algorithms course at the ASU F
 
 The main objective of this project is to demonstrate the understanding and application of the data structures and algorithms learned in the course.
 
-## Pictures
-![Can'tFindPostsPic](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Compression.png)
+## Excerpts
+Compression:
+![Compression](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Compression.png)
+Decompression:
+![Decompression](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Decompression.png)
+Correction:
+![Correction](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/CorrectionExample.png)
+Formation and Cloning:
+![formating and cloning](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/FormattingAndColoring.png)
+Minifying:
+![Minifying](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Minifiying.png)
+Graph Network:
+![Graph](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/VisualizeNetworkGraph.png)
+Graph:
+![Graph](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Graph.png)
+Search By Body:
+![Search By Body](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/SearchByBody.png)
+Search By Tobic:
+![Search By Tobic](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/SearchByTopic.png)
+JASON:
+![JASON](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/XML2JSON.png)
 
 
 ## Contributing
