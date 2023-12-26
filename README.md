@@ -1,8 +1,19 @@
-# XML Editor
+# XML_Editor
 
-This is a simple xml editor built with java that allows you to perform various operations on xml files.
+This project is a GUI-based program that parses and visualizes XML files. It provides various functionalities such as checking XML consistency, formatting XML, converting XML to JSON, minifying XML, compressing data, decompressing data, representing user data using a graph data structure, performing network analysis, and searching for specific words or topics in posts.
 
-## Demo
+#Team Members
+|              Name                  |    ID    |
+| Karim Ibrahim Saad Abd-Elrazek     |  2001118 |
+| Adham Khaled Abd El Maqsoud        |  2000066 |
+| Maged Mohamed Abdelghaffar         |  2001951 |
+| Mohamed Montasser Ebrahim Yousef   |  2100416 |
+| Ahmed Khaled Abdelmaksod Ebrahim   |  2000218 |
+| Ezzat Tarek Mohamed Alsayed        |  2001022 |
+| Ahmed Mohammed Bakr Ahmed          |  2000037 |
+
+
+
 
 ## Features
 
