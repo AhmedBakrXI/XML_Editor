@@ -54,17 +54,17 @@ The main objective of this project is to demonstrate the understanding and appli
 ![Correction](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/CorrectionExample.png)
 ### Formation and Cloning:
 ![formating and cloning](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/FormattingAndColoring.png)
-Minifying:
+### Minifying:
 ![Minifying](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Minifiying.png)
-Graph Network:
+### Graph Network:
 ![Graph](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/VisualizeNetworkGraph.png)
-Graph:
+### Graph:
 ![Graph](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Graph.png)
-Search By Body:
+### Search By Body:
 ![Search By Body](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/SearchByBody.png)
-Search By Tobic:
+### Search By Tobic:
 ![Search By Tobic](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/SearchByTopic.png)
-JASON:
+### JASON:
 ![JASON](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/XML2JSON.png)
 
 
