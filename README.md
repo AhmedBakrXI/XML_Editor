@@ -2,7 +2,7 @@
 
 This project is a GUI-based program that parses and visualizes XML files. It provides various functionalities such as checking XML consistency, formatting XML, converting XML to JSON, minifying XML, compressing data, decompressing data, representing user data using a graph data structure, performing network analysis, and searching for specific words or topics in posts.
 
-# Team Members
+## Team Members
 |              Name                  |    ID    |
 |------------------------------------|----------|
 | Karim Ibrahim Saad Abd-Elrazek     |  2001118 |
@@ -14,7 +14,7 @@ This project is a GUI-based program that parses and visualizes XML files. It pro
 | Ahmed Mohammed Bakr Ahmed          |  2000037 |
 
 
-# YouTube Link
+## YouTube Link
 https://youtu.be/-SxLlH3rwvY?si=xwTTLRPTFbdR_9Wz
 
 ## Features
@@ -44,3 +44,10 @@ To use this xml editor, you need to follow these steps:
 This project is a part of the Data Structures and Algorithms course at the ASU Faculty of engineering Computer department. The course covers the fundamental concepts and techniques of designing and implementing efficient and effective data structures and algorithms. The course also provides hands-on experience in applying these concepts and techniques to solve real-world problems.
 
 The main objective of this project is to demonstrate the understanding and application of the data structures and algorithms learned in the course.
+
+## Pictures
+
+
+
+## Contributing
+Contributions to the XML Parser and Visualizer project are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request. For major changes, please discuss them first in an issue to ensure they align with the project's goals.
