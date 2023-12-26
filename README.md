@@ -46,6 +46,9 @@ This project is a part of the Data Structures and Algorithms course at the ASU F
 The main objective of this project is to demonstrate the understanding and application of the data structures and algorithms learned in the course.
 
 ## Excerpts
+
+![image](https://github.com/AhmedBakrXI/XML_Editor/assets/115044095/b34871db-47d0-42e9-a844-e750b6f2edca)
+
 ### Compression:
 ![Compression](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Compression.png)
 ### Decompression:
