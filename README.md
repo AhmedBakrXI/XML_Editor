@@ -46,13 +46,13 @@ This project is a part of the Data Structures and Algorithms course at the ASU F
 The main objective of this project is to demonstrate the understanding and application of the data structures and algorithms learned in the course.
 
 ## Excerpts
-Compression:
+###Compression:
 ![Compression](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Compression.png)
-Decompression:
+###Decompression:
 ![Decompression](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Decompression.png)
-Correction:
+###Correction:
 ![Correction](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/CorrectionExample.png)
-Formation and Cloning:
+###Formation and Cloning:
 ![formating and cloning](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/FormattingAndColoring.png)
 Minifying:
 ![Minifying](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Minifiying.png)
