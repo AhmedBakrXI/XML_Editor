@@ -1,0 +1,131 @@
+    <users>
+                <user>
+                                <id>1
+<name>Yasser Mohsen</name>
+            <posts>
+                <post><body>
+    My name is Yasser, topics: education, football.
+                   
+        <topics>
+    <topic>
+                  education
+                        </topic>
+                <topic>
+                            football
+                                   </topic>
+            </topics>
+                </post>
+            </posts>
+            <followers>
+                <follower>
+                    <id>5
+    </follower>
+                <follower>
+                <id>3</id>
+                </follower>
+            </followers>
+        </user>
+                        <user>
+            <id>2                       </id>
+            <name>Ahmed Mohsen
+            <posts>
+                <post>
+                    <body>
+               My name is Ahmed, topics: education, basketball.
+                    </body>
+                    <topics>
+                        <topic>
+                            education
+                        </topic>
+                        <topic>
+                            basketball
+        </topic>
+                    </topics>
+                </post>
+            </posts>
+            <followers>
+                <follower>
+                    <id>3</id>
+                </follower>
+                <follower>
+                                                                <id>1</id>
+                </follower>
+            </followers>
+        </user>
+        <user>
+    <id>3</id>
+            <name>Shawky Chan</name>
+            <posts>
+                <post>
+                          <body>            My name is Shawky, topics: books, basketball.
+                    </body>
+      <topics>
+                        <topic>
+                       books
+                                                </topic>
+                        <topic>
+       basketball
+</topic>
+                    </topics>
+                </post>
+                                                            </posts>
+      <followers>
+                <follower>
+                    <id>5</id>
+                </follower>
+            </followers>
+   </user>
+        <user>
+                  <id>4
+
+                  </id>
+                                           <name>Gaymer</name>
+     <posts>
+                <post>
+                             <body>
+                        My name is Mostafa, topics: education, sports.
+                    </body>
+          <topics>
+                              <topic>
+                                       education
+                 </topic>
+                              <topic>
+                            sports
+                        </topic>
+                    </topics>
+                </post>
+                        </posts>
+       <followers>
+                       <follower>
+        <id>5</id>
+                </follower>
+            </followers>
+        </user>
+                           <user>
+                  <id>5</id>
+            <name>Mohamed Sherif</name>
+                                 <posts>
+                <post>
+                    <body>
+                        My name is Mohamed Sherif, topics: sports.
+                    </body>
+                               <topics>
+                                                 <topic>
+                            sports
+                        </topic>
+            </topics>
+                                        </post>
+                               </posts>
+            <followers>
+                <follower>
+                    <id>1</id>
+                               </follower>
+                <follower>
+                    <id>2</id>
+                            </follower>
+             <follower>
+                    <id>3</id>
+         </follower>
+            </followers>
+        </user>
+    </users>
