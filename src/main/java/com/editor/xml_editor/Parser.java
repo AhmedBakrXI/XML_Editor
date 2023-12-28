@@ -17,6 +17,7 @@ public class Parser {
     private List<String> correctedXML;
     private String replaceError;
     private int errorCount;
+
     public Parser() {
         userList = new ArrayList<>();
         xmlErrors = new ArrayList<>();
@@ -139,14 +140,6 @@ public class Parser {
         return tagStack.isEmpty();
     }
 
-    private boolean isNumeric(String value) {
-        try {
-            Integer.parseInt(value);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 
     public List<Integer> correctXML() {
         correctedXML = new ArrayList<>();
@@ -156,11 +149,18 @@ public class Parser {
 
 
         while (!checkConsistency(correctedXML)) {
-            if (!correctedXML.get(0).equals("<users>"))
-                correctedXML.add(0, "<users>");
-            if (!correctedXML.get(correctedXML.size() - 1).equals("</users>")) {
-                correctedXML.add(correctedXML.size() - 1, "</users>");
-                continue;
+            if ((counter == 20) || (xmlParsed.size() < 2)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Can't Correct");
+                alert.setTitle("Error !!");
+                alert.showAndWait();
+                try {
+                    runAlarm();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                break;
             }
 
             if (isClosingTag(replaceError)) {
@@ -212,30 +212,31 @@ public class Parser {
                             }
                             correctedXML.add(j, "</" + tag + ">");
                             break;
+                        } else if (!correctedXML.get(0).equals("<users>")) {
+                            correctedXML.add(0, "<users>");
+                        } else if (!correctedXML.get(correctedXML.size() - 1).equals("</users>")) {
+                            correctedXML.add(correctedXML.size() - 1, "</users>");
                         }
                     }
                 }
             }
             counter++;
-            if ((counter == 20)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Can't Correct");
-                alert.setTitle("Error !!");
-                alert.showAndWait();
-                try {
-                    runAlarm();
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-                break;
-            }
+
         }
 
 
         errorTagsIndex = compareArrayLists(xmlParsed, correctedXML);
         errorCount = correctedXML.size() - xmlParsed.size();
         return errorTagsIndex;
+    }
+
+    private boolean noTagsFound(List<String> xml) {
+        for (String tag : xml) {
+            if (isTag(tag)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void runAlarm() throws UnsupportedAudioFileException, IOException, LineUnavailableException, URISyntaxException {
@@ -262,12 +263,4 @@ public class Parser {
         }
         return result;
     }
-
-//    public static void main(String[] args) {
-//        String s = FileHandler.readFile("test.xml");
-//        Parser parser = new Parser();
-//        parser.parseXML(s);
-//        parser.correctXML();
-//        List<String> xml = parser.getCorrectedXML();
-//    }
 }
