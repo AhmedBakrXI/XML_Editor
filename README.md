@@ -15,7 +15,10 @@ This project is a GUI-based program that parses and visualizes XML files. It pro
 
 
 ## YouTube Link
-https://youtu.be/-SxLlH3rwvY?si=xwTTLRPTFbdR_9Wz
+### [🔗 Demo Video](https://youtu.be/LQ7cx2m3g38)
+
+## Executable
+### Executable files (.exe, .jar) are found in [Executables Directory](https://github.com/AhmedBakrXI/XML_Editor/tree/main/Executables)
 
 ## Features
 
@@ -46,7 +49,7 @@ This project is a part of the Data Structures and Algorithms course at the ASU F
 The main objective of this project is to demonstrate the understanding and application of the data structures and algorithms learned in the course.
 
 ## Excerpts
-### XML Iditor:
+### XML Editor:
 ![xml editor](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/XML_EDITOR.png)
 ### Compression:
 ![Compression](https://github.com/AhmedBakrXI/XML_Editor/blob/main/Snapshots/Compression.png)
