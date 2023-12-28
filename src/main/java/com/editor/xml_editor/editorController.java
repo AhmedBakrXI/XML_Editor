@@ -275,7 +275,6 @@ public class editorController implements Initializable {
 
         outputText.getChildren().clear();
         outputText.getChildren().add(new Text(fileContent));
-        FileHandler.writeFile(inputFile.getPath(), fileContent);
     }
 
     public void undoHandler() {
@@ -314,7 +313,7 @@ public class editorController implements Initializable {
     }
 
     private String list2String() {
-        List<String> list = parser.getXmlParsed();
+        List<String> list = parser.getCorrectedXML();
         StringBuilder xmlBuilder = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             if (list.size() > (i + 1)) {
@@ -482,28 +481,30 @@ public class editorController implements Initializable {
         stage.show();
 
         Font font = Font.font("Consolas", 18);
-        Text mostActiveText = new Text("Most Active User: " + mostActiveUser.getUsername() + "\n");
-        Text mostInfluencerText = new Text("Most Influencer: " + mostInfluencerUser.getUsername() + "\n");
-        mostActiveText.setFill(Color.RED);
-        mostInfluencerText.setFill(Color.GREEN);
-        mostActiveText.setFont(font);
-        mostInfluencerText.setFont(font);
 
-        Text mutualText = new Text("Mutual Followers: \n" + mutualFollowersStringBuilder());
-        mutualText.setFont(font);
-        mutualText.setFill(Color.BLUEVIOLET);
+        if (mostActiveUser != null && mostInfluencerUser != null) {
+            Text mostActiveText = new Text("Most Active User: " + mostActiveUser.getUsername() + "\n");
+            Text mostInfluencerText = new Text("Most Influencer: " + mostInfluencerUser.getUsername() + "\n");
+            mostActiveText.setFill(Color.RED);
+            mostInfluencerText.setFill(Color.GREEN);
+            mostActiveText.setFont(font);
+            mostInfluencerText.setFont(font);
 
-        Text suggestText = new Text("Suggested Followers: \n" + suggestedFollowersStringBuilder());
-        suggestText.setFont(font);
-        suggestText.setFill(Color.ORANGE);
+            Text mutualText = new Text("Mutual Followers: \n" + mutualFollowersStringBuilder());
+            mutualText.setFont(font);
+            mutualText.setFill(Color.BLUEVIOLET);
 
-        TextFlow textFlow = new TextFlow();
-        textFlow.getChildren().addAll(mostActiveText,
-                mostInfluencerText,
-                mutualText,
-                suggestText);
-        pane.getChildren().add(textFlow);
+            Text suggestText = new Text("Suggested Followers: \n" + suggestedFollowersStringBuilder());
+            suggestText.setFont(font);
+            suggestText.setFill(Color.ORANGE);
 
+            TextFlow textFlow = new TextFlow();
+            textFlow.getChildren().addAll(mostActiveText,
+                    mostInfluencerText,
+                    mutualText,
+                    suggestText);
+            pane.getChildren().add(textFlow);
+        }
     }
 
     private User getUserByID(int id) {

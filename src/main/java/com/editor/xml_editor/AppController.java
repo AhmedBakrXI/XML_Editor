@@ -142,9 +142,9 @@ public class AppController  {
 
     @FXML
     void onCopyAndPasteButton(ActionEvent event) {
-
-        openFullScreenStage("");
-
+        String temp = "<users>\n\n</users>";
+        editorController.fileContent = temp;
+        openFullScreenStage(temp);
     }
 
 

@@ -1,5 +1,7 @@
 package com.editor.xml_editor;
 
+import javafx.scene.control.Alert;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -23,25 +25,15 @@ public class Parser {
     }
 
     public static boolean isOpeningTag(String tag) {
-        boolean result = tag.startsWith("<") && tag.endsWith(">") && !tag.contains("/");
-
-        return result;
+        return tag.startsWith("<") && tag.endsWith(">") && !tag.contains("/");
     }
 
     public static boolean isClosingTag(String tag) {
-        boolean result = false;
-
-        String s = tag.substring(1, 2);
-        if (tag.startsWith("<") && tag.endsWith(">") && s.equals("/"))
-            result = true;
-
-        return result;
+        return tag.startsWith("</") && tag.endsWith(">");
     }
 
     public static boolean isTag(String tag) {
-        boolean result = tag.startsWith("<") && tag.endsWith(">");
-
-        return result;
+        return tag.startsWith("<") && tag.endsWith(">");
     }
 
     public static String listToString(List<String> list) {
@@ -147,13 +139,31 @@ public class Parser {
         return tagStack.isEmpty();
     }
 
+    private boolean isNumeric(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     public List<Integer> correctXML() {
         correctedXML = new ArrayList<>();
         List<Integer> errorTagsIndex;
         correctedXML.addAll(xmlParsed);
         int counter = 0;
+
+
         while (!checkConsistency(correctedXML)) {
-            if (replaceError.startsWith("</") && replaceError.endsWith(">")) {
+            if (!correctedXML.get(0).equals("<users>"))
+                correctedXML.add(0, "<users>");
+            if (!correctedXML.get(correctedXML.size() - 1).equals("</users>")) {
+                correctedXML.add(correctedXML.size() - 1, "</users>");
+                continue;
+            }
+
+            if (isClosingTag(replaceError)) {
                 String tag = replaceError.substring(replaceError.indexOf("</") + 2, replaceError.indexOf(">"));
                 for (int i = 0; i < correctedXML.size(); i++) {
                     if (correctedXML.get(i).equals("<" + tag + ">")) {
@@ -207,8 +217,12 @@ public class Parser {
                 }
             }
             counter++;
-            if ((counter == 10)) {
-                System.out.println("Can't correct");
+            if ((counter == 20)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Can't Correct");
+                alert.setTitle("Error !!");
+                alert.showAndWait();
                 try {
                     runAlarm();
                 } catch (Exception e) {
