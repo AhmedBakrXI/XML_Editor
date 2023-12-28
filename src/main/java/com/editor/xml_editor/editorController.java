@@ -204,10 +204,10 @@ public class editorController implements Initializable {
         List<String> list = parser.getCorrectedXML();
         String xml = Parser.listToString(list);
 
-        HuffmanCompression.decompress(new File("compressed.txt"), new File("decompressed.txt"));
+        HuffmanCompression.decompress(new File("compressed.txt"), new File("decompressed.xml"));
         String decodedString = null;
         try {
-            decodedString = FileHandler.readFile("decompressed.txt");
+            decodedString = FileHandler.readFile("decompressed.xml");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
