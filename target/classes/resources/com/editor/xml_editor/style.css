@@ -1,0 +1,7 @@
+.button {
+    -fx-cursor: default; /* Set default cursor */
+}
+
+.button:hover {
+    -fx-cursor: hand; /* Change cursor to hand on hover */
+}

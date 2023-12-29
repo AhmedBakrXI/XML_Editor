@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2d2d5f;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.editor.xml_editor.AppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2d2d5f;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.editor.xml_editor.AppController">
    <children>
       <HBox alignment="CENTER" layoutY="-3.0" prefHeight="407.0" prefWidth="600.0">
          <children>
@@ -66,7 +66,7 @@
                               <Insets bottom="12.0" top="12.0" />
                            </VBox.margin>
                         </Line>
-                        <Button fx:id="CopyPasteButton" mnemonicParsing="false" style="-fx-background-color: #d02f60; -fx-border-radius: 100px;" text="📋 Copy and Paste" textFill="WHITE">
+                        <Button fx:id="CopyPasteButton" mnemonicParsing="false" onAction="#onCopyAndPasteButton" style="-fx-background-color: #d02f60; -fx-border-radius: 100px;" text="📋 Copy and Paste" textFill="WHITE">
                            <font>
                               <Font name="Fira Code Bold" size="18.0" />
                            </font>
