@@ -16,8 +16,7 @@ public class NetworkAnalysis {
         int[] followers = new int[g.getV()];
         for(int i = 0; i < g.getV(); i++) {
             LinkedList<Integer> adj = g.getAdj(i);
-            for(int j = 0; j < adj.size(); j++) {
-                int follower = adj.get(j);
+            for(Integer follower : adj) {
                 followers[follower]++;
             }
         }
@@ -64,12 +63,10 @@ public class NetworkAnalysis {
         LinkedList<Integer> adjOfU1 = g.getAdj(u1);
         LinkedList<Integer> adjOfU2 = g.getAdj(u2);
 
-        for(int i = 0; i < adjOfU1.size(); i++) {
-            int follower = adjOfU1.get(i);
+        for(Integer follower : adjOfU1) {
             followersOfU1[follower] = 1;
         }
-        for(int i = 0; i < adjOfU2.size(); i++) {
-            int follower = adjOfU2.get(i);
+        for(Integer follower : adjOfU2) {
             followersOfU2[follower] = 1;
         }
 
@@ -88,11 +85,9 @@ public class NetworkAnalysis {
         LinkedList<Integer> followers = g.getAdj(u);
         LinkedList<Integer> suggestedFollowers = new LinkedList<Integer>();
 
-        for(int i = 0; i < followers.size(); i++) {
-            int follower = followers.get(i);
+        for(Integer follower : followers) {
             LinkedList<Integer> followersOfFollower = g.getAdj(follower);
-            for(int j = 0; j < followersOfFollower.size(); j++) {
-                int followerOfFollower = followersOfFollower.get(j);
+            for(Integer followerOfFollower : followersOfFollower) {
                 if(!suggestedFollowers.contains(followerOfFollower) && followerOfFollower != u) {
                     suggestedFollowers.add(followerOfFollower);
                 }
