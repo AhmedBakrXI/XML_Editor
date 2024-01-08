@@ -1,11 +1,11 @@
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 package com.editor.xml_editor;
-
+                    
 import java.lang.String;
 import java.util.Stack;
 
-public class Undo_Redo {
+public class Undo_Redo{
 
     static Stack<String> stack_test = new Stack<>();          // main stack
     static Stack<String> stack_test2 = new Stack<>();         // temp stack
